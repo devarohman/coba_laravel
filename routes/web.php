@@ -68,3 +68,5 @@ Route::get('/dashboard', function() {
 })->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+Route::resource('/dashboard/categories', AdminCategoryController::class);
