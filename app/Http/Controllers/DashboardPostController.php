@@ -114,9 +114,7 @@ class DashboardPostController extends Controller
            $validatedData = $request->validate($rules);
 
            if($request->file('image')){
-            if($request->image){
-                Storage::delete($request->oldImage);
-            }
+            !is_null($post->image) && Storage::delete($post->image);
             $validatedData['image'] = $request->file('image')->store('post-image');
            }
 
