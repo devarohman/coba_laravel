@@ -24,12 +24,12 @@
 
 @if ($posts->count())
 <div class="card mb-3">
-    <div style="max-height: 1500px; overflow:hidden;">
+    <div style="max-height: 1300px; overflow:hidden;">
         @if ($posts[0]->image)
             <img src="{{ asset('storage/' . $posts[0]->image ) }}"{{ $posts[0]->category->name }}" alt="{{ $posts[0]->category->slug }}" class="img-fluid">
     </div>
         @else
-            <img src="https://source.unsplash.com/900x350?{{ $posts[0]->category->name }}" class="card-img-top" alt="{{ $posts[0]->category->name }}">
+            <img src="https://source.unsplash.com/800x300?{{ $posts[0]->category->name }}" class="card-img-top" alt="{{ $posts[0]->category->name }}">
         @endif   
     <div class="card-body text-center">
       <h3 class="card-title"><a href="/post/{{ $posts[0]->slug }}" class="text-decoration-none text-dark">{{ $posts[0]->title }}</a></h3>

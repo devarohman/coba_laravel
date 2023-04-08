@@ -58,4 +58,34 @@ class Post extends Model
     {
         return('slug');
     }
+    public function scopeFilter2($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            return $query->where(function($query) use ($search) {
+                 $query->where('title', 'like', '%' . $search . '%')
+                 ->orWhere('nm_perusahaan', 'like', '%' . $search . '%')
+                 ->orWhere('pemilik', 'like', '%' . $search . '%')
+                 ->orWhere('NIB', 'like', '%' . $search . '%')
+                 ->orWhere('alamat', 'like', '%' . $search . '%')
+                 ->orWhere('domisili', 'like', '%' . $search . '%')
+                 ->orWhere('lokasi_bpspp', 'like', '%' . $search . '%')
+                 ->orWhere('no_rekom', 'like', '%' . $search . '%')
+                 ->orWhere('tgl_keluar_rekom', 'like', '%' . $search . '%')
+                 ->orWhere('no_sertifikat_standard', 'like', '%' . $search . '%')
+                 ->orWhere('bentuk_perusahaan', 'like', '%' . $search . '%')
+                 ->orWhere('no_kbli', 'like', '%' . $search . '%')
+                 ->orWhere('lokasi_rekom', 'like', '%' . $search . '%')
+                 ->orWhere('tgl_permohonan', 'like', '%' . $search . '%')
+                 ->orWhere('no_permohonan_regular', 'like', '%' . $search . '%')
+                 ->orWhere('no_permohonan_ossrba', 'like', '%' . $search . '%')
+                 ->orWhere('masa_berlaku_rekom', 'like', '%' . $search . '%');
+            });
+        });
+        $query->when($filters['kabupaten'] ?? false, function($query, $kabupaten) {
+            return $query->whereHas('kabupaten', function($query) use ($kabupaten) {
+                $query->where('id', $kabupaten); 
+            });
+        });
+    }
+
 }
